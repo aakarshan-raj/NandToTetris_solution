@@ -15,7 +15,7 @@ CHIP Mux16 {
 
     PARTS:
     // Put your code here:
-  Nand(a=b[0],b=sel,out=topNand0);
+Nand(a=b[0],b=sel,out=topNand0);
 Nand(a=sel,b=sel,out=midNand0);
 Nand(a=midNand0,b=a[0],out=downNand0);
 Nand(a=topNand0,b=downNand0,out=out[0]);
