@@ -1,0 +1,82 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/01/Mux16.hdl
+
+/**
+ * 16-bit multiplexor: 
+ * for i = 0..15 out[i] = a[i] if sel == 0 
+ *                        b[i] if sel == 1
+ */
+
+CHIP Mux16 {
+    IN a[16], b[16], sel;
+    OUT out[16];
+
+    PARTS:
+    // Put your code here:
+  Nand(a=b[0],b=sel,out=topNand0);
+Nand(a=sel,b=sel,out=midNand0);
+Nand(a=midNand0,b=a[0],out=downNand0);
+Nand(a=topNand0,b=downNand0,out=out[0]);
+Nand(a=b[1],b=sel,out=topNand1);
+Nand(a=sel,b=sel,out=midNand1);
+Nand(a=midNand1,b=a[1],out=downNand1);
+Nand(a=topNand1,b=downNand1,out=out[1]);
+Nand(a=b[2],b=sel,out=topNand2);
+Nand(a=sel,b=sel,out=midNand2);
+Nand(a=midNand2,b=a[2],out=downNand2);
+Nand(a=topNand2,b=downNand2,out=out[2]);
+Nand(a=b[3],b=sel,out=topNand3);
+Nand(a=sel,b=sel,out=midNand3);
+Nand(a=midNand3,b=a[3],out=downNand3);
+Nand(a=topNand3,b=downNand3,out=out[3]);
+Nand(a=b[4],b=sel,out=topNand4);
+Nand(a=sel,b=sel,out=midNand4);
+Nand(a=midNand4,b=a[4],out=downNand4);
+Nand(a=topNand4,b=downNand4,out=out[4]);
+Nand(a=b[5],b=sel,out=topNand5);
+Nand(a=sel,b=sel,out=midNand5);
+Nand(a=midNand5,b=a[5],out=downNand5);
+Nand(a=topNand5,b=downNand5,out=out[5]);
+Nand(a=b[6],b=sel,out=topNand6);
+Nand(a=sel,b=sel,out=midNand6);
+Nand(a=midNand6,b=a[6],out=downNand6);
+Nand(a=topNand6,b=downNand6,out=out[6]);
+Nand(a=b[7],b=sel,out=topNand7);
+Nand(a=sel,b=sel,out=midNand7);
+Nand(a=midNand7,b=a[7],out=downNand7);
+Nand(a=topNand7,b=downNand7,out=out[7]);
+Nand(a=b[8],b=sel,out=topNand8);
+Nand(a=sel,b=sel,out=midNand8);
+Nand(a=midNand8,b=a[8],out=downNand8);
+Nand(a=topNand8,b=downNand8,out=out[8]);
+Nand(a=b[9],b=sel,out=topNand9);
+Nand(a=sel,b=sel,out=midNand9);
+Nand(a=midNand9,b=a[9],out=downNand9);
+Nand(a=topNand9,b=downNand9,out=out[9]);
+Nand(a=b[10],b=sel,out=topNand10);
+Nand(a=sel,b=sel,out=midNand10);
+Nand(a=midNand10,b=a[10],out=downNand10);
+Nand(a=topNand10,b=downNand10,out=out[10]);
+Nand(a=b[11],b=sel,out=topNand11);
+Nand(a=sel,b=sel,out=midNand11);
+Nand(a=midNand11,b=a[11],out=downNand11);
+Nand(a=topNand11,b=downNand11,out=out[11]);
+Nand(a=b[12],b=sel,out=topNand12);
+Nand(a=sel,b=sel,out=midNand12);
+Nand(a=midNand12,b=a[12],out=downNand12);
+Nand(a=topNand12,b=downNand12,out=out[12]);
+Nand(a=b[13],b=sel,out=topNand13);
+Nand(a=sel,b=sel,out=midNand13);
+Nand(a=midNand13,b=a[13],out=downNand13);
+Nand(a=topNand13,b=downNand13,out=out[13]);
+Nand(a=b[14],b=sel,out=topNand14);
+Nand(a=sel,b=sel,out=midNand14);
+Nand(a=midNand14,b=a[14],out=downNand14);
+Nand(a=topNand14,b=downNand14,out=out[14]);
+Nand(a=b[15],b=sel,out=topNand15);
+Nand(a=sel,b=sel,out=midNand15);
+Nand(a=midNand15,b=a[15],out=downNand15);
+Nand(a=topNand15,b=downNand15,out=out[15]);
+}
