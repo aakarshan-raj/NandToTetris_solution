@@ -14,7 +14,15 @@
 CHIP PC {
     IN in[16],load,inc,reset;
     OUT out[16];
-
+    
     PARTS:
-    // Put your code here:
+    Inc16(in=oo,out=incout);
+    Mux16(a=oo,b=incout,sel=inc,out=muxone);
+    Mux16(a=muxone,b=in,sel=load,out=muxtwo);
+    Mux16(a=muxtwo,b=false,sel=reset,out=muxthree);
+    Register(in=muxthree,load=true,out=out,out=oo);
+
+
 }
+
+
