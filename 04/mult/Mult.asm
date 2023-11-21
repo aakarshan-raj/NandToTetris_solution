@@ -10,3 +10,26 @@
 // R0 >= 0, R1 >= 0, and R0*R1 < 32768.
 
 // Put your code here.
+
+@3        
+M=0         // INITIALISE I
+(LOOP)    
+@3          // LOAD I
+D=M
+@1          // LOAD N (R1)
+D=D-M       
+@END
+D;JGT      
+@2         // LOAD RESULT REG
+D=M
+@0
+D=D+M      // INCR REGISTER REG BY R0 VALUE
+@2
+M=D        // STORE RESULT
+@3
+M=M+1      // INCREMENT I
+@LOOP
+0;JMP
+(END)        
+@END
+0;JMP
