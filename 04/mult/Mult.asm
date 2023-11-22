@@ -10,7 +10,8 @@
 // R0 >= 0, R1 >= 0, and R0*R1 < 32768.
 
 // Put your code here.
-
+@2
+M=0
 @3        
 M=0         // INITIALISE I
 (LOOP)    
@@ -19,7 +20,7 @@ D=M
 @1          // LOAD N (R1)
 D=D-M       
 @END
-D;JGT      
+D;JEQ      
 @2         // LOAD RESULT REG
 D=M
 @0
