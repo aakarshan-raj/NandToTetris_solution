@@ -39,5 +39,38 @@ CHIP CPU {
         pc[15];          // address of next instruction
 
     PARTS:
-    // Put your code here:
+    Not(in=instruction[15],out=typeA);
+    Or(a=typeA,b=instruction[5],out=AregControl);
+
+    And(a=instruction[3],b=instruction[15],out=writeM);            
+    And(a=instruction[5],b=instruction[15],out=firstMux);          
+
+    Mux16(a=instruction,b=fx,sel=firstMux,out=forAreg);
+
+    ARegister(in=forAreg,load=AregControl,out=ARegOut,out[0..14]=addressM);
+
+    Not(in=instruction[12],out=MorA);
+    
+    Mux16(a=inM,b=ARegOut,sel=MorA,out=forAlu);
+
+    DRegister(in=toD,load=instruction[4],out=DRegOut);
+
+    ALU(x=DRegOut,y=forAlu,zx=instruction[11],nx=instruction[10],zy=instruction[9],ny=instruction[8],
+        f=instruction[7],no=instruction[6],out=outM,out=toD,out=fx,zr=zrOut,ng=ngOut);
+
+    Not(in=zrOut,out=notZrOut);
+    Not(in=ngOut,out=notNgOut);
+    And(a=notZrOut,b=notNgOut,out=JGT);
+
+    Or(a=zrOut,b=ngOut,out=JLE);
+    Mux8(a=false, b=JGT, c=zrOut, d=notNgOut, e=ngOut, f=notZrOut, g=JLE, h=true, sel=instruction[0..2], out=muxLoad);
+    And(a=instruction[15],b=muxLoad,out=pcLoad);
+    
+    PC(in=ARegOut,load=pcLoad,inc=true,reset=reset,out[0..14]=pc);
 }
+
+
+
+
+
+
