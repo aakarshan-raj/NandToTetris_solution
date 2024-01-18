@@ -39,11 +39,12 @@ CHIP CPU {
         pc[15];          // address of next instruction
 
     PARTS:
-    Not(in=instruction[15],out=typeA);
-    Or(a=typeA,b=instruction[5],out=AregControl);
+    Not(in=instruction[15],out=typeA);              // Check for Type A instruction
+    Or(a=typeA,b=instruction[5],out=AregControl);   // Check if Destination is D Register
 
-    And(a=instruction[3],b=instruction[15],out=writeM);            
-    And(a=instruction[5],b=instruction[15],out=firstMux);          
+    And(a=instruction[3],b=instruction[15],out=writeM);      // Write To Memory if d3(M) is set and Its Type C instruction      
+    And(a=instruction[5],b=instruction[15],out=firstMux);    // Write To A Register if Type C instruction and d1(A) bit is set      
+    And(a=instruction[4],b=instruction[15],out=writeD);      // Write To D REgister if Type C instruction and d2(D) but is set
 
     Mux16(a=instruction,b=fx,sel=firstMux,out=forAreg);
 
@@ -53,8 +54,7 @@ CHIP CPU {
     
     Mux16(a=inM,b=ARegOut,sel=MorA,out=forAlu);
 
-    DRegister(in=toD,load=instruction[4],out=DRegOut);
-
+    DRegister(in=toD,load=writeD,out=DRegOut);   
     ALU(x=DRegOut,y=forAlu,zx=instruction[11],nx=instruction[10],zy=instruction[9],ny=instruction[8],
         f=instruction[7],no=instruction[6],out=outM,out=toD,out=fx,zr=zrOut,ng=ngOut);
 
